@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Alert, View, Text } from "react-native";
-import { Image } from "expo-image";
+import { Alert, View, Text, Image } from "react-native";
 import { supabase } from "../../lib/supabaseClient";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useColorScheme } from "@/hooks/useColorScheme";
+
+const image = require("../../assets/images/react-logo.png");
 
 export default function AuthPage() {
   const [email, setEmail] = useState("");
@@ -11,6 +12,8 @@ export default function AuthPage() {
   const [loading, setLoading] = useState(false);
 
   const theme = useColorScheme();
+
+  console.log({ image });
 
   async function signInWithEmail() {
     setLoading(true);
@@ -40,11 +43,8 @@ export default function AuthPage() {
     <View
       className={`h-full p-4 pt-20 bg-light-background dark:bg-dark-background flex justify-between pb-20`}
     >
-      <View className="flex-1">
-        <Image
-          source={require("../../assets/images/man-with-smartphone.png")}
-          style={{ width: 200, height: 200 }}
-        />
+      <View className="flex justify-center items-center flex-1">
+        <Image source={image} />
       </View>
       <View className="py-1 self-stretch mt-5">
         <TouchableOpacity
