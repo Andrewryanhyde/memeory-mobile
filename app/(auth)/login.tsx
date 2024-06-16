@@ -1,13 +1,16 @@
 import React, { useState } from "react";
-import { Alert, StyleSheet, TextInput, View, Button, Text } from "react-native";
+import { Alert, View, Text } from "react-native";
+import { Image } from "expo-image";
 import { supabase } from "../../lib/supabaseClient";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { Stack } from "expo-router";
+import { useColorScheme } from "@/hooks/useColorScheme";
 
 export default function AuthPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const theme = useColorScheme();
 
   async function signInWithEmail() {
     setLoading(true);
@@ -31,87 +34,44 @@ export default function AuthPage() {
     setLoading(false);
   }
 
+  console.log({ theme });
+
   return (
-    <View style={styles.container}>
-      <Stack.Screen
-        options={{ headerShown: true, title: "Supabase Expo Router App" }}
-      />
-      <View style={[styles.verticallySpaced, styles.mt20]}>
-        <TextInput
-          style={styles.textInput}
-          label="Email"
-          onChangeText={(text) => setEmail(text)}
-          value={email}
-          placeholder="email@address.com"
-          autoCapitalize={"none"}
+    <View
+      className={`h-full p-4 pt-20 bg-light-background dark:bg-dark-background flex justify-between pb-20`}
+    >
+      <View className="flex-1">
+        <Image
+          source={require("../../assets/images/man-with-smartphone.png")}
+          style={{ width: 200, height: 200 }}
         />
       </View>
-      <View style={styles.verticallySpaced}>
-        <TextInput
-          style={styles.textInput}
-          label="Password"
-          onChangeText={(text) => setPassword(text)}
-          value={password}
-          secureTextEntry={true}
-          placeholder="Password"
-          autoCapitalize={"none"}
-        />
-      </View>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
+      <View className="py-1 self-stretch mt-5">
         <TouchableOpacity
           disabled={loading}
           onPress={() => signInWithEmail()}
-          style={styles.buttonContainer}
+          className={`rounded-lg py-2 px-3 m-2 bg-light-background dark:bg-dark-background border-2 border-light-border dark:border-dark-border `}
         >
-          <Text style={styles.buttonText}>SIGN IN</Text>
+          <Text
+            className={`text-lg font-bold self-center text-light-text dark:text-dark-text`}
+          >
+            Log In
+          </Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.verticallySpaced}>
+      <View className="py-1 self-stretch">
         <TouchableOpacity
           disabled={loading}
           onPress={() => signUpWithEmail()}
-          style={styles.buttonContainer}
+          className={`rounded-lg py-2 px-3 m-2 bg-light-background dark:bg-dark-background border-2 border-light-border dark:border-dark-border `}
         >
-          <Text style={styles.buttonText}>SIGN UP</Text>
+          <Text
+            className={`text-lg font-bold self-center text-light-text dark:text-dark-text`}
+          >
+            Create Account
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 40,
-    padding: 12,
-  },
-  verticallySpaced: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    alignSelf: "stretch",
-  },
-  mt20: {
-    marginTop: 20,
-  },
-  buttonContainer: {
-    backgroundColor: "#000968",
-    borderRadius: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 12,
-    margin: 8,
-  },
-  buttonText: {
-    fontSize: 18,
-    color: "#fff",
-    fontWeight: "bold",
-    alignSelf: "center",
-    textTransform: "uppercase",
-  },
-  textInput: {
-    borderColor: "#000968",
-    borderRadius: 4,
-    borderStyle: "solid",
-    borderWidth: 1,
-    padding: 12,
-    margin: 8,
-  },
-});

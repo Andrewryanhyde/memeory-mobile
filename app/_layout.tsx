@@ -21,9 +21,15 @@ export default function RootLayout() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Stack>
         {session ? (
-          <Stack.Screen name="(tabs)" options={{ title: "Home" }} />
+          <Stack.Screen
+            name="(tabs)"
+            options={{ title: "Home", headerShown: false }}
+          />
         ) : (
-          <Stack.Screen name="(auth)" options={{ title: "Sign In" }} />
+          <Stack.Screen
+            name="(auth)"
+            options={{ title: "Sign In", headerShown: false }}
+          />
         )}
       </Stack>
     </GestureHandlerRootView>
