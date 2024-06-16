@@ -9,7 +9,7 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text>This is the index screen (tabs)</Text>
+      <Text>This is the search screen (tabs)</Text>
     </View>
   );
 }
