@@ -4,7 +4,7 @@ import { supabase } from "../../lib/supabaseClient";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useColorScheme } from "@/hooks/useColorScheme";
 
-const image = require("../../assets/images/react-logo.png");
+const image = require("../../assets/images/man-with-smartphone.png");
 
 export default function AuthPage() {
   const [email, setEmail] = useState("");
@@ -41,10 +41,17 @@ export default function AuthPage() {
 
   return (
     <View
-      className={`h-full p-4 pt-20 bg-light-background dark:bg-dark-background flex justify-between pb-20`}
+      className={`h-full p-4 bg-light-background dark:bg-dark-background flex justify-between pb-20`}
     >
-      <View className="flex justify-center items-center flex-1">
-        <Image source={image} />
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
+        <Image source={image} style={{ width: 200, height: 260 }} />
       </View>
       <View className="py-1 self-stretch mt-5">
         <TouchableOpacity
